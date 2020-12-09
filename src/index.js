@@ -22,4 +22,7 @@ import "./day7/task2";
 import "./day8/task1";
 import "./day8/task2";
 
+import "./day9/task1";
+import "./day9/task2";
+
 // document.getElementById("app").innerHTML = "res";
