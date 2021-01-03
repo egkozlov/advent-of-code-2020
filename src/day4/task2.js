@@ -1,6 +1,8 @@
-const inputData = require("./input.txt");
-const { splitTextToArray } = require("../shared.js");
+const { splitTextToArray, readFile } = require("../shared.js");
+const { getPassporst } = require("./shared.js");
+const inputData = readFile("./day4/input.txt");
 const data = splitTextToArray(inputData);
+
 // byr (Birth Year) - four digits; at least 1920 and at most 2002.
 // iyr (Issue Year) - four digits; at least 2010 and at most 2020.
 // eyr (Expiration Year) - four digits; at least 2020 and at most 2030.
@@ -32,26 +34,11 @@ const validationRules = {
   ecl: (v) => ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"].includes(v),
   pid: (v) => v.split("").length === 9
 };
-let passports = [];
-let passport = "";
 
-data.forEach((d) => {
-  if (d === "") {
-    passports.push(passport);
-    passport = "";
-  } else {
-    if (passport) {
-      passport += ` ${d}`;
-    } else {
-      passport = d;
-    }
-  }
-});
-passports.push(passport);
-
-passports = passports
-  .map((p) =>
-    p
+const passports = getPassporst(data);
+const result = passports
+  .map((passport) =>
+    passport
       .split(" ")
       .map((pair) => pair.split(":"))
       .filter(([k]) => k !== "cid")
@@ -63,6 +50,7 @@ passports = passports
   .filter((p) => Object.keys(p).length === 7)
   .filter((p) =>
     Object.entries(p).every(([key, value]) => validationRules[key](value))
-  );
+  )
+  .length;
 
-console.log(`day4: task2: ${passports.length}`);
+console.log(`day4: task2: ${result}`);

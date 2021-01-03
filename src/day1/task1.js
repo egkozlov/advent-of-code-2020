@@ -1,10 +1,6 @@
-const inputData = require("./input.txt");
-const { splitTextToArray } = require("../shared.js");
-
-const splitTextToIntArray = (txt) =>
-  splitTextToArray(txt).map((n) => parseInt(n, 10));
-
-const values = splitTextToIntArray(inputData);
+const { splitTextToArray, readFile } = require("../shared.js");
+const inputData = readFile('./day1/input.txt');
+const values = splitTextToArray(inputData).map((n) => parseInt(n, 10));
 
 let a;
 let b;

@@ -1,9 +1,7 @@
-const inputData = require("./input.txt");
-const { splitTextToArray } = require("../shared.js");
+const { splitTextToArray, readFile } = require("../shared.js");
+const inputData = readFile("./day3/input.txt");
+const values = splitTextToArray(inputData).map((n) => n.split(""));
 
-const splitTextToValues = (txt) =>
-  splitTextToArray(txt).map((n) => n.split(""));
-const values = splitTextToValues(inputData);
 const yMax = values.length;
 const xMax = values[0].length;
 
